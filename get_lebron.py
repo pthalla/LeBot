@@ -19,9 +19,9 @@ for tag in tags:
   links.append(link)
 
 links = list(set(links))
-for link in links:
-  print(link)
+#for link in links:
+#  print(link)
 
 api = TwitterAPI(config.api_key, config.api_secret, config.access_token, config.access_token_secret)
-#r = api.request("statuses/update", {"status": links[0]})
-#print(r.status_code)
+r = api.request("statuses/update", {"status": links[0]})
+print(r.status_code)
