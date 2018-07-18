@@ -4,6 +4,7 @@ import re
 from TwitterAPI import TwitterAPI
 import config
 import time
+from datetime import datetime
 
 # URL for web scraping the keyboard 'lebron'
 url = "http://www.espn.com/nba/"
@@ -29,6 +30,7 @@ def get_lebron_links():
 def post_to_twitter(link):
   api = TwitterAPI(config.api_key, config.api_secret, config.access_token, config.access_token_secret)
   r = api.request("statuses/update", {"status": link})
+  print(str(datetime.now()) + ": " + link)
 
 # Request web scraping data from ESPN every 15 seconds
 while (True):
