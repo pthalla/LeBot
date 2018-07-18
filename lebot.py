@@ -14,7 +14,7 @@ used_links = {}
 def get_lebron_links():
   page = requests.get(url)
   soup = bs(page.text, 'html.parser')
-  tags = soup.find_all("a", href=re.compile("lebron", re.IGNORECASE))
+  tags = soup.find_all("a", href=re.compile("kawhi", re.IGNORECASE))
   
   # Formatting the LeBron references:
   links = []
