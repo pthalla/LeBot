@@ -5,7 +5,10 @@ from TwitterAPI import TwitterAPI
 import config
 import time
 
+# URL for web scraping the keyboard 'lebron'
 url = "http://www.espn.com/nba/"
+# Dictionary/hashtable for keeping track of which links were already posted to Twitter 
+used_links = {}
 
 def get_lebron_links():
   page = requests.get(url)
@@ -19,21 +22,18 @@ def get_lebron_links():
     if (link[0] == "/"):
       link = "http://www.espn.com" + link
     links.append(link)
-  links = list(set(links))
-  
+  links = set(links)
+
   return links
 
-
-'''
-def post_to_twitter(links):
+def post_to_twitter(link):
   api = TwitterAPI(config.api_key, config.api_secret, config.access_token, config.access_token_secret)
-  r = api.request("statuses/update", {"status": links[0]})
-  print(r.status_code)
-'''
-
+  r = api.request("statuses/update", {"status": link})
 
 while (True):
   links = get_lebron_links()
   for link in links:
-    print(link)
+    if (link not in used_links):
+      used_links[link] = True
+      post_to_twitter(link)
   time.sleep(15)
