@@ -22,7 +22,7 @@ def get_lebron_links():
   links = list(set(links))
   
   return links
-  
+
 
 '''
 def post_to_twitter(links):
@@ -36,4 +36,4 @@ while (True):
   links = get_lebron_links()
   for link in links:
     print(link)
-  time.sleep(2)
+  time.sleep(15)
