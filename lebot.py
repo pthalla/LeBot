@@ -14,8 +14,8 @@ used_links = {}
 def get_lebron_links():
   page = requests.get(url)
   soup = bs(page.text, 'html.parser')
-  tags = soup.find_all("a", href=re.compile("kawhi", re.IGNORECASE))
-  
+  tags = soup.find_all("a", href=re.compile("lebron", re.IGNORECASE))
+
   # Formatting the LeBron references:
   links = []
   for tag in tags:
@@ -29,8 +29,8 @@ def get_lebron_links():
 
 def post_to_twitter(link):
   api = TwitterAPI(config.api_key, config.api_secret, config.access_token, config.access_token_secret)
-  r = api.request("statuses/update", {"status": link})
-  print(str(datetime.now()) + ": " + link)
+  r = api.request("statuses/update", {"status": link})      
+  print(str(datetime.now()) + ": " + link + " (Status code: " + str(r.status_code) + ")")
 
 # Request web scraping data from ESPN every 15 seconds
 while (True):
@@ -39,4 +39,4 @@ while (True):
     if (link not in used_links):
       used_links[link] = True
       post_to_twitter(link)
-  time.sleep(15)
+  time.sleep(20)
